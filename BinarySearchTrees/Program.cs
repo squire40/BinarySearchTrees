@@ -10,32 +10,18 @@ class Node
     }
 }
 class Solution {
-    static int _height;
     static int getHeight(Node root)
     {
         //Write your code here
-        Node node = null;
-        do
+        if (root == null)
         {
-            node = CrawlTreeRecursive(node, _height);
-        } while (node != null);
-        return _height;
-    }
-    static Node CrawlTreeRecursive(Node node, int height)
-    {
-        if (node == null)
-        {
-            return null;
+            return -1;
         }
-        if (node.left != null || node.right != null)
-        {
-            if (height <= _height)
-            {
-                _height++;
-                return CrawlTreeRecursive(node.left ?? node.right ?? null, _height);
-            }
-        }
-        return node;
+
+        int leftHeight = 1 + getHeight(root.left);
+        int rightHeight = 1 + getHeight(root.right);
+
+        return leftHeight > rightHeight ? leftHeight : rightHeight;
     }
     static Node insert(Node root, int data)
     {
